@@ -151,8 +151,8 @@ export type GamePass = {
 }
 
 Config.GamePasses = {
-	{ key = "doubleCash", id = 0, name = "Dinheiro x2", description = "Seus brainrots rendem o dobro, para sempre." },
-	{ key = "vipTroll", id = 0, name = "VIP Troll", description = "Ganha a Casca de Banana e a Corneta Troll de graça." },
+	{ key = "doubleCash", id = 2053829594, name = "Dinheiro x2", description = "Seus brainrots rendem o dobro, para sempre." },
+	{ key = "vipTroll", id = 2052467556, name = "VIP Troll", description = "Ganha a Casca de Banana e a Corneta Troll de graça." },
 } :: { GamePass }
 
 export type Product = {
