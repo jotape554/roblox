@@ -8,22 +8,37 @@ Projeto organizado para o **Rojo**, que sincroniza estes arquivos com o Roblox S
 | Parte | Estado |
 |---|---|
 | Configuração central (`src/shared/Config.luau`) | Pronto |
-| Salvamento com trava de sessão (`DataService`) | Pronto, não testado no Studio |
-| Arena neon e 8 bases geradas por código (`WorldBuilder`) | Pronto, não testado no Studio |
-| Criaturas placeholder com uid único (`BrainrotFactory`) | Pronto, não testado no Studio |
-| Bases, vagas, renda, coleta e tranca (`PlotService`) | Pronto, não testado no Studio |
-| Esteira de compra (`ConveyorService`) | Pronto, não testado no Studio |
-| Roubo com regras de sucesso/falha (`StealService`) | Pronto, não testado no Studio |
-| Bastão, banana, corneta (`CombatService`) | Pronto, não testado no Studio |
-| Loja e venda (`ShopService`) | Pronto, não testado no Studio |
-| Robux: passes e produtos (`MonetizationService`) | Pronto; IDs ainda são 0 |
-| **Interface do cliente (`src/client`)** | **NÃO FEITO: próximo passo** |
+| Salvamento com trava de sessão (`DataService`) | Pronto, testado no Studio |
+| Arena neon e 8 bases geradas por código (`WorldBuilder`) | Pronto, testado no Studio |
+| Criaturas placeholder com uid único (`BrainrotFactory`) | Pronto, testado no Studio |
+| Bases, vagas, renda, coleta e tranca (`PlotService`) | Pronto, testado no Studio |
+| Esteira de compra (`ConveyorService`) | Pronto, testado no Studio |
+| Roubo com regras de sucesso/falha (`StealService`) | Pronto, testado no Studio |
+| Bastão, banana, corneta (`CombatService`) | Pronto; tapa testado, banana/corneta não |
+| Loja e venda (`ShopService`) | Pronto, testado no Studio |
+| Robux: passes e produtos (`MonetizationService`) | Pronto; IDs ainda são 0, não testável até publicar |
+| Interface do cliente (`src/client`) | Pronto, testado no Studio |
 
-Sem o cliente o jogo ainda não é jogável: faltam HUD, lojas, inventário, configurações,
-tutorial, a regra de esconder os botões Roubar/Vender e o empurrão do tapa.
+O cliente (`src/client`) tem: HUD (dinheiro, renda/s, vagas, botões), loja (melhorias,
+vaga extra e aba Robux), inventário (criaturas da base + melhorias compradas),
+configurações (som, menos efeitos, rever tutorial), tutorial de primeira entrada,
+a regra de esconder os botões Roubar/Vender por audiência e o empurrão do tapa
+(knockback + "tropeço" via `Humanoid.PlatformStand`).
 
-Verificação feita: os 15 arquivos compilam sem erro de sintaxe (`luau-compile`).
-Ainda falta checar os tipos contra a API do Roblox e testar dentro do Studio.
+Verificação feita: todos os arquivos (servidor, shared e cliente) foram checados com
+`luau-lsp analyze --platform roblox` contra um sourcemap do Rojo, e o projeto builda
+com `rojo build` sem erro. Fora do escopo do cliente, a checagem também encontrou um
+tipo impreciso pré-existente em `PlotService.reserved` (linha 232), já corrigido.
+
+**Testado no Roblox Studio** (solo e com "Servidor e clientes", 2 jogadores): tutorial
+de primeira entrada, som, esteira (comprar), coleta, loja (comprar melhoria e vaga),
+vender, roubo, combate (tapa), tranca da base e expulsão de invasores — tudo
+funcionando. Durante o teste um bug real apareceu e foi corrigido: `SoundController`
+usava `SoundService.Volume`, que não existe na API do Roblox (o `luau-lsp` em modo
+não-estrito não pega indexação de propriedade inexistente em serviços, só testando
+no Studio isso apareceu); agora ele ajusta o `Volume` de cada `Sound` individualmente.
+Não testado ainda: banana, corneta e o botão "Rever tutorial" nas Configurações
+(sem bugs conhecidos, só não foram confirmados).
 
 ## Como abrir no seu PC (Windows)
 
@@ -53,5 +68,5 @@ Ainda falta checar os tipos contra a API do Roblox e testar dentro do Studio.
 ```
 src/shared   -> ReplicatedStorage.Shared (Config, Format, Remotes)
 src/server   -> ServerScriptService.Server (Main.server + serviços)
-src/client   -> StarterPlayerScripts.Client (interface, a fazer)
+src/client   -> StarterPlayerScripts.Client (interface: HUD, loja, inventário, config, tutorial)
 ```

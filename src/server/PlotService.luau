@@ -21,7 +21,7 @@ export type Plot = {
 	owner: Player?,
 	models: { [number]: Model },
 	pending: { [number]: number },
-	reserved: { [number]: boolean }, -- vaga reservada enquanto a criatura está sendo roubada
+	reserved: { [number]: boolean? }, -- vaga reservada enquanto a criatura está sendo roubada
 	lockedUntil: number,
 	lockCooldownUntil: number,
 }
