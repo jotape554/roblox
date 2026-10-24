@@ -1,20 +1,48 @@
 -- Silencia o jogo para este jogador quando a configuração de som está
--- desligada. O volume é ajustado só no cliente (cada jogador ouve o próprio
--- SoundService), então não precisa de nenhum remote.
+-- desligada. SoundService não tem um volume mestre controlável pelo cliente,
+-- então a gente ajusta o Volume de cada Sound individualmente — funciona
+-- porque CombatService.playSound só grava o Volume uma vez na criação, então
+-- sobrescrever aqui localmente não é desfeito pelo servidor depois.
 
 local Players = game:GetService("Players")
-local SoundService = game:GetService("SoundService")
+local Workspace = game:GetService("Workspace")
 
 local LocalPlayer = Players.LocalPlayer
 
 local SoundController = {}
 
-function SoundController.start()
-	local function apply()
-		SoundService.Volume = if LocalPlayer:GetAttribute("SettingSound") == false then 0 else 1
+local function isEnabled(): boolean
+	return LocalPlayer:GetAttribute("SettingSound") ~= false
+end
+
+local function apply(sound: Sound)
+	local original = sound:GetAttribute("OriginalVolume")
+	if typeof(original) ~= "number" then
+		original = sound.Volume
+		sound:SetAttribute("OriginalVolume", original)
 	end
-	apply()
-	LocalPlayer:GetAttributeChangedSignal("SettingSound"):Connect(apply)
+	sound.Volume = if isEnabled() then original else 0
+end
+
+function SoundController.start()
+	for _, instance in Workspace:GetDescendants() do
+		if instance:IsA("Sound") then
+			apply(instance)
+		end
+	end
+	Workspace.DescendantAdded:Connect(function(instance)
+		if instance:IsA("Sound") then
+			apply(instance)
+		end
+	end)
+
+	LocalPlayer:GetAttributeChangedSignal("SettingSound"):Connect(function()
+		for _, instance in Workspace:GetDescendants() do
+			if instance:IsA("Sound") then
+				apply(instance)
+			end
+		end
+	end)
 end
 
 return SoundController
