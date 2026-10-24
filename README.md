@@ -17,13 +17,21 @@ Projeto organizado para o **Rojo**, que sincroniza estes arquivos com o Roblox S
 | Bastão, banana, corneta (`CombatService`) | Pronto, não testado no Studio |
 | Loja e venda (`ShopService`) | Pronto, não testado no Studio |
 | Robux: passes e produtos (`MonetizationService`) | Pronto; IDs ainda são 0 |
-| **Interface do cliente (`src/client`)** | **NÃO FEITO: próximo passo** |
+| Interface do cliente (`src/client`) | Pronto, não testado no Studio |
 
-Sem o cliente o jogo ainda não é jogável: faltam HUD, lojas, inventário, configurações,
-tutorial, a regra de esconder os botões Roubar/Vender e o empurrão do tapa.
+O cliente (`src/client`) tem: HUD (dinheiro, renda/s, vagas, botões), loja (melhorias,
+vaga extra e aba Robux), inventário (criaturas da base + melhorias compradas),
+configurações (som, menos efeitos, rever tutorial), tutorial de primeira entrada,
+a regra de esconder os botões Roubar/Vender por audiência e o empurrão do tapa
+(knockback + "tropeço" via `Humanoid.PlatformStand`).
 
-Verificação feita: os 15 arquivos compilam sem erro de sintaxe (`luau-compile`).
-Ainda falta checar os tipos contra a API do Roblox e testar dentro do Studio.
+Verificação feita: todos os arquivos (servidor, shared e cliente) foram checados com
+`luau-lsp analyze --platform roblox` contra um sourcemap do Rojo e o projeto builda
+com `rojo build` sem erro. Fora do escopo do cliente, a checagem também encontrou um
+tipo impreciso pré-existente em `PlotService.reserved` (linha 232: a tabela é anotada
+como `{ [number]: boolean }`, mas o código grava `nil` para apagar uma vaga reservada;
+funciona em runtime, só o tipo declarado está apertado demais). Ainda falta testar
+tudo dentro do Studio.
 
 ## Como abrir no seu PC (Windows)
 
@@ -53,5 +61,5 @@ Ainda falta checar os tipos contra a API do Roblox e testar dentro do Studio.
 ```
 src/shared   -> ReplicatedStorage.Shared (Config, Format, Remotes)
 src/server   -> ServerScriptService.Server (Main.server + serviços)
-src/client   -> StarterPlayerScripts.Client (interface, a fazer)
+src/client   -> StarterPlayerScripts.Client (interface: HUD, loja, inventário, config, tutorial)
 ```
