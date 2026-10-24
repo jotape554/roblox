@@ -151,8 +151,8 @@ export type GamePass = {
 }
 
 Config.GamePasses = {
-	{ key = "doubleCash", id = 0, name = "Dinheiro x2", description = "Seus brainrots rendem o dobro, para sempre." },
-	{ key = "vipTroll", id = 0, name = "VIP Troll", description = "Ganha a Casca de Banana e a Corneta Troll de graça." },
+	{ key = "doubleCash", id = 2053829594, name = "Dinheiro x2", description = "Seus brainrots rendem o dobro, para sempre." },
+	{ key = "vipTroll", id = 2052467556, name = "VIP Troll", description = "Ganha a Casca de Banana e a Corneta Troll de graça." },
 } :: { GamePass }
 
 export type Product = {
@@ -165,12 +165,12 @@ export type Product = {
 }
 
 Config.Products = {
-	{ key = "cashSmall", id = 0, name = "Pacote Pequeno", description = "10 minutos da sua renda (mínimo $5K).", cashSeconds = 600, cashMin = 5000 },
-	{ key = "cashMedium", id = 0, name = "Pacote Médio", description = "1 hora da sua renda (mínimo $50K).", cashSeconds = 3600, cashMin = 50000 },
-	{ key = "cashLarge", id = 0, name = "Pacote Gigante", description = "6 horas da sua renda (mínimo $500K).", cashSeconds = 21600, cashMin = 500000 },
-	{ key = "globalSlap", id = 0, name = "Tapa Global", description = "Dá um tapa em TODOS do servidor. Quem estava roubando larga tudo." },
-	{ key = "shield", id = 0, name = "Escudo de 5 min", description = "Tranca sua base por 5 minutos na hora." },
-	{ key = "bananaRain", id = 0, name = "Chuva de Bananas", description = "30 cascas de banana caem pelo mapa. Você não escorrega." },
+	{ key = "cashSmall", id = 2053247666, name = "Pacote Pequeno", description = "10 minutos da sua renda (mínimo $5K).", cashSeconds = 600, cashMin = 5000 },
+	{ key = "cashMedium", id = 2053685573, name = "Pacote Médio", description = "1 hora da sua renda (mínimo $50K).", cashSeconds = 3600, cashMin = 50000 },
+	{ key = "cashLarge", id = 2052347629, name = "Pacote Gigante", description = "6 horas da sua renda (mínimo $500K).", cashSeconds = 21600, cashMin = 500000 },
+	{ key = "globalSlap", id = 2053919617, name = "Tapa Global", description = "Dá um tapa em TODOS do servidor. Quem estava roubando larga tudo." },
+	{ key = "shield", id = 2053007609, name = "Escudo de 5 min", description = "Tranca sua base por 5 minutos na hora." },
+	{ key = "bananaRain", id = 2052029632, name = "Chuva de Bananas", description = "30 cascas de banana caem pelo mapa. Você não escorrega." },
 } :: { Product }
 
 -- Combate e trollagem -------------------------------------------------------
