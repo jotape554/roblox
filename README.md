@@ -30,8 +30,8 @@ Ainda falta checar os tipos contra a API do Roblox e testar dentro do Studio.
 1. Instale o [Git](https://git-scm.com/download/win) e o Roblox Studio.
 2. No PowerShell:
    ```powershell
-   git clone https://github.com/jotape554/brainrot-heist.git
-   cd brainrot-heist
+   git clone https://github.com/jotape554/roblox.git
+   cd roblox
    ```
 3. Instale o Rojo: baixe `rojo-7.4.4-windows-x86_64.zip` em
    https://github.com/rojo-rbx/rojo/releases, extraia o `rojo.exe` nesta pasta
