@@ -101,29 +101,31 @@ function WorldBuilder.billboard(adornee: BasePart, offset: Vector3, studs: Vecto
 end
 
 local function setupLighting()
-	Lighting.ClockTime = 20.5
-	Lighting.Brightness = 1.5
-	Lighting.Ambient = Color3.fromRGB(40, 45, 80)
-	Lighting.OutdoorAmbient = Color3.fromRGB(60, 65, 110)
-	Lighting.EnvironmentDiffuseScale = 0.4
+	-- Clima noturno de neon, mas claro o bastante pra enxergar tudo sem apertar os olhos.
+	Lighting.ClockTime = 19.3
+	Lighting.Brightness = 3
+	Lighting.Ambient = Color3.fromRGB(95, 100, 140)
+	Lighting.OutdoorAmbient = Color3.fromRGB(115, 120, 160)
+	Lighting.EnvironmentDiffuseScale = 0.6
 	Lighting.EnvironmentSpecularScale = 0.6
 	Lighting.FogColor = Theme.background
-	Lighting.FogStart = 250
-	Lighting.FogEnd = 700
+	Lighting.FogStart = 350
+	Lighting.FogEnd = 900
 
 	if not Lighting:FindFirstChild("HeistBloom") then
 		local bloom = Instance.new("BloomEffect")
 		bloom.Name = "HeistBloom"
-		bloom.Intensity = 0.6
-		bloom.Size = 24
-		bloom.Threshold = 1.6
+		bloom.Intensity = 0.5
+		bloom.Size = 20
+		bloom.Threshold = 1.8
 		bloom.Parent = Lighting
 	end
 	if not Lighting:FindFirstChild("HeistColor") then
 		local color = Instance.new("ColorCorrectionEffect")
 		color.Name = "HeistColor"
-		color.Contrast = 0.1
-		color.Saturation = 0.1
+		color.Brightness = 0.06
+		color.Contrast = 0.08
+		color.Saturation = 0.12
 		color.TintColor = Color3.fromRGB(235, 240, 255)
 		color.Parent = Lighting
 	end
