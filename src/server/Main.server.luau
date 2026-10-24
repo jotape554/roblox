@@ -56,6 +56,8 @@ local function onPlayerAdded(player: Player)
 		return -- foi expulso ou saiu durante o carregamento
 	end
 
+	DataService.addCash(player, 200000) -- DEBUG: remover depois de testar banana/corneta
+
 	local plot = PlotService.assign(player)
 	if not plot then
 		warn("[Main] Sem base livre para", player.Name)
