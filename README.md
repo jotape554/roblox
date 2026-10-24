@@ -14,9 +14,9 @@ Projeto organizado para o **Rojo**, que sincroniza estes arquivos com o Roblox S
 | Bases, vagas, renda, coleta e tranca (`PlotService`) | Pronto, testado no Studio |
 | Esteira de compra (`ConveyorService`) | Pronto, testado no Studio |
 | Roubo com regras de sucesso/falha (`StealService`) | Pronto, testado no Studio |
-| Bastão, banana, corneta (`CombatService`) | Pronto; tapa testado, banana/corneta não |
+| Bastão, banana, corneta (`CombatService`) | Pronto, testado no Studio |
 | Loja e venda (`ShopService`) | Pronto, testado no Studio |
-| Robux: passes e produtos (`MonetizationService`) | Pronto; IDs ainda são 0, não testável até publicar |
+| Robux: passes e produtos (`MonetizationService`) | Pronto; jogo publicado, IDs reais configurados |
 | Interface do cliente (`src/client`) | Pronto, testado no Studio |
 
 O cliente (`src/client`) tem: HUD (dinheiro, renda/s, vagas, botões), loja (melhorias,
@@ -31,14 +31,20 @@ com `rojo build` sem erro. Fora do escopo do cliente, a checagem também encontr
 tipo impreciso pré-existente em `PlotService.reserved` (linha 232), já corrigido.
 
 **Testado no Roblox Studio** (solo e com "Servidor e clientes", 2 jogadores): tutorial
-de primeira entrada, som, esteira (comprar), coleta, loja (comprar melhoria e vaga),
-vender, roubo, combate (tapa), tranca da base e expulsão de invasores — tudo
-funcionando. Durante o teste um bug real apareceu e foi corrigido: `SoundController`
-usava `SoundService.Volume`, que não existe na API do Roblox (o `luau-lsp` em modo
-não-estrito não pega indexação de propriedade inexistente em serviços, só testando
-no Studio isso apareceu); agora ele ajusta o `Volume` de cada `Sound` individualmente.
-Não testado ainda: banana, corneta e o botão "Rever tutorial" nas Configurações
-(sem bugs conhecidos, só não foram confirmados).
+de primeira entrada (e "Rever tutorial"), som, esteira (comprar), coleta, loja
+(melhorias, vaga extra, banana, corneta), vender, roubo, combate (tapa, banana,
+corneta), tranca da base e expulsão de invasores — tudo funcionando. Durante o teste
+um bug real apareceu e foi corrigido: `SoundController` usava `SoundService.Volume`,
+que não existe na API do Roblox (o `luau-lsp` em modo não-estrito não pega indexação
+de propriedade inexistente em serviços, só testando no Studio isso apareceu); agora
+ele ajusta o `Volume` de cada `Sound` individualmente.
+
+O jogo já foi **publicado no Roblox** e os 2 Game Passes + 6 Developer Products têm
+IDs reais configurados em `Config.luau` (preços definidos no Creator Hub, não no código).
+
+Ainda não feito: trocar os modelos placeholder das criaturas (`BrainrotFactory`) por
+modelos 3D de verdade — hoje são blocos/esferas/cilindros coloridos, funcionais mas
+visualmente simples.
 
 ## Como abrir no seu PC (Windows)
 
